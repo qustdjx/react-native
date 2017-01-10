@@ -18,6 +18,7 @@ import React, {
   Image,
   View
 } from 'react-native';
+
 var _navigator;
 var MainPage = require('./MainPage');
 import NButton from './app/commonview/NButton';
