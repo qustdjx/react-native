@@ -13,8 +13,16 @@ import React, {
   View
 } from 'react-native';
 import Head from './Head';
-import TopScreen from './TopScreen';
+
 class MyHealth extends Component {
+
+    getData($jsonData)
+    {
+        console.log('daa');
+        console.log('dd'+$jsonData);
+    }
+
+
 
   render() {
     return (

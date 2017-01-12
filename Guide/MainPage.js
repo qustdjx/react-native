@@ -6,15 +6,26 @@
 'use strict';
 import React,{ Component} from 'react';
 import {
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    Image,
+    Dimensions,
+    Navigator,
+    TouchableOpacity,
+    ToastAndroid,
+    WebView,
+    View
 } from 'react-native';
 
 
-// import MyHealth from './MyHealth';
-// import HealthTools from './HealthTools';
-// import HealthSQ  from './HealthSQ';
-// import MyAccount  from './MyAccount';
+import MyHealth from './MyHealth';
+import HealthTools from './HealthTools';
+import HealthSQ  from './HealthSQ';
+import MyAccount  from './MyAccount';
+import TabNavigator from 'react-native-tab-navigator';
+import TopScreen  from './TopScreen';
+import NetUitl from './app/net/NetUitl';
 
  const MY_HEALTH = '我的健康';
  const MY_HEALTH_NORMAL = require('./image/my_health_un.png');
@@ -32,7 +43,7 @@ import {
  const MY_HEALTH_ACCOUNT_NORMAL = require('./image/my_account_un.png');
  const MY_HEALTH_ACCOUNT_FOCUS = require('./image/my_account_on.png');
 
- class MainPage extends React.Component {
+ class MainPage extends Component {
 
      constructor(props) {
          super(props);
@@ -58,6 +69,7 @@ import {
              </TabNavigator.Item>
          );
      }
+
 
      _createChildView1(tag) {
          let renderView;
@@ -94,6 +106,14 @@ import {
      render(){
          let {tabBarShow} = this.state;
          console.log(tabBarShow);
+         let sx = 'dddd';
+         let url='http://framework.heapsegment.com/';
+         function _getData(set)
+         {
+             console.log(set);
+             return set;
+         }
+         NetUitl.postFrom(url,sx,_getData);
          return (
              <View style={{flex: 1}}>
                  <TabNavigator hidesTabTouch={true}

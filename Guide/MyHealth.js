@@ -3,17 +3,15 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  Image,
-  ScrollView,
-  View
+import React, {Component,} from 'react';
+import {
+    StyleSheet,
+    Text,
+    Image,
+    ScrollView,
+    View
 } from 'react-native';
 import Head from './Head';
-import TopScreen from './TopScreen';
 class MyHealth extends Component {
 
   render() {

@@ -109,7 +109,7 @@ let tabBarHidden = false;
 
     render(){
       let {tabBarShow} = this.state;
-       console.log(tabBarShow);
+
       return (
         <View style={{flex: 1}}>
               <TabNavigator hidesTabTouch={true}

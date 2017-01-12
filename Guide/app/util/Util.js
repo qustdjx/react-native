@@ -1,16 +1,13 @@
 
 
 'use strict';
-import React, {
-  Component,
-} from 'react-native';
-
+import React, {Component} from 'react';
 
 import Md5Uitl from './Md5Uitl';
 /**
 *工具的实现
 */
-class Util extends React.Component {
+class Util extends Component {
 
  static getToken(time) {
    return Md5Uitl.md5(time +Util.getPswId());

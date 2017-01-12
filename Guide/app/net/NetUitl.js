@@ -1,12 +1,11 @@
 
 
 'use strict';
-import React, {
-  Component,
-} from 'react-native';
+import React, {Component} from 'react';
+
 import Util from '../util/Util';
 import Global from '../util/Global';
-class NetUitl extends React.Component {
+class NetUitl extends Component {
 
   //post请求
   static  postFrom(url, data, callback) {

@@ -1,16 +1,14 @@
 'use strict';
 
-import React,{ Component} from 'react';
+import React, {Component,} from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    Component,
-    View,
-    Dimensions,
-    ToastAndroid,
-    TouchableOpacity,
-    Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ToastAndroid,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import ViewPager from 'react-native-viewpager';
@@ -30,6 +28,7 @@ class TopScreen extends React.Component {
                 .cloneWithPages(IMGS),
               };
   }
+
 
   _onPressButton1(){
     alert("健康圈子");

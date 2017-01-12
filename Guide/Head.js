@@ -3,12 +3,11 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View
+import React, {Component} from 'react';
+import  {
+    StyleSheet,
+    Text,
+    View
 } from 'react-native';
 
 class Head extends Component {

@@ -3,11 +3,11 @@
 'use strict';
 import React, {
   Component,
-} from 'react-native';
+} from 'react';
 /**
 *JsonUitl的实现
 */
-class JsonUitl extends React.Component {
+class JsonUitl extends Component {
 
   /**
   *
