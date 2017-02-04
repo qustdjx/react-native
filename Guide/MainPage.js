@@ -6,7 +6,6 @@
 'use strict';
 import React,{ Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     Image,
@@ -43,11 +42,27 @@ import NetUitl from './app/net/NetUitl';
  const MY_HEALTH_ACCOUNT_NORMAL = require('./image/my_account_un.png');
  const MY_HEALTH_ACCOUNT_FOCUS = require('./image/my_account_on.png');
 
+ const SHOP_INDEX='首页';
+ const SHOP_INDEX_TAB_NORMAL=require('./image/tabs/home_normal.png');
+ const SHOP_INDEX_TAB_FOCUS=require('./image/tabs/home_focus.png');
+ const SHOP_WEI_TAO='微淘';
+ const SHOP_WEI_TAO_TAB_NORMAL=require('./image/tabs/cart_normal.png');
+ const SHOP_WEI_TAO_TAB_FOCUS=require('./image/tabs/cart_focus.png');
+ const SHOP_DISCOVER='发现';
+ const SHOP_DISCOVER_TAB_NORMAL=require('./image/tabs/faxian_normal.png');
+ const SHOP_DISCOVER_TAB_FOCUS=require('./image/tabs/faxian_focus.png');
+ const SHOP_CART='购物车';
+ const SHOP_CART_TAB_NORMAL=require('./image/tabs/cart_normal.png');
+ const SHOP_CART_TAB_FOCUS=require('./image/tabs/cart_focus.png');
+ const SHOP_ME='我的商场';
+ const SHOP_ME_TAB_NORMAL=require('./image/tabs/personal_normal.png');
+ const SHOP_ME_TAB_FOCUS=require('./image/tabs/personal_focus.png');
+
  class MainPage extends Component {
 
      constructor(props) {
          super(props);
-         this.state = {selectedTab: MY_HEALTH,
+         this.state = {selectedTab: SHOP_INDEX,
              tabBarShow:true};
          this._renderTabItem =  this._renderTabItem.bind(this);
      }
@@ -106,14 +121,14 @@ import NetUitl from './app/net/NetUitl';
      render(){
          let {tabBarShow} = this.state;
          console.log(tabBarShow);
-         let sx = 'dddd';
-         let url='http://framework.heapsegment.com/';
-         function _getData(set)
-         {
-             console.log(set);
-             return set;
-         }
-         NetUitl.postFrom(url,sx,_getData);
+         // let sx = 'dddd';
+         // let url='http://127.0.0.1:9012/ReactNativeApi/getGuideImage';
+         // function _getData(set)
+         // {
+         //     console.log(set);
+         //     return set;
+         // }
+         // NetUitl.postFrom(url,sx,_getData);
          return (
              <View style={{flex: 1}}>
                  <TabNavigator hidesTabTouch={true}

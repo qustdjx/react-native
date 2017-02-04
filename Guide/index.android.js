@@ -25,12 +25,20 @@ import {
     View
 } from 'react-native';
 
-var _navigator;
-var MainPage = require('./MainPage');
+let _navigator;
+let MainPage = require('./MainPage');
 import NButton from './app/commonview/NButton';
 import HelloWorldApp from './HelloWorldApp'
+import NetUitl from './app/net/NetUitl';
+import DeviceStorage from './app/util/DeviceStorage';
+
 class Guide extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {guideImg:null,count:0};
+        this._getGuideSource=this._getGuideSource.bind(this);
+    }
     /**
      *实例化时候调用，以后不再调用，初始化固定值，以后不再变，如静态的数据源。
      */
@@ -49,7 +57,13 @@ class Guide extends Component {
      *组件将要被加载在视图
      */
     componentWillMount(){
+        DeviceStorage.save('count',0);
+      let  count=DeviceStorage.get('count');
+      console.log(count);
+    }
 
+    _getGuideSource(set) {
+        this.setState({guideImg:set});
     }
 
     /**
@@ -57,6 +71,16 @@ class Guide extends Component {
      */
     configureScenceAndroid(){
         return Navigator.SceneConfigs.FadeAndroid;
+    }
+
+    renderLoadingView() {
+        return (
+            <View style={styles.container}>
+                <Text>
+                    正在网络上获取电影数据……
+                </Text>
+            </View>
+        );
     }
 
     /**
@@ -110,6 +134,12 @@ class Guide extends Component {
     render(){
         var renderScene = this.renderSceneAndroid;
         var configureScence = this.configureScenceAndroid;
+
+
+        if (!this.state.guideImg) {
+            //如果guideImg==null的情况 初始情况  渲染加载视图
+            return this.renderLoadingView();
+        }
         return (
             <Navigator
                 debugOverlay={false}
@@ -120,11 +150,25 @@ class Guide extends Component {
         );
     }
     //用了render方法后，组件加载成功并被成功渲染出来以后所执行的hook函数，一般会将网络请求等加载数据的操作，放在这个函数里进行，来保证不会出现UI上的错误
-    componentDidMount(){}
+    componentDidMount(){
+
+        if(this.state.count)
+        {
+            let url='http://framework.heapsegment.com/ReactNativeApi/getGuideImage';
+            NetUitl.get(url,this._getGuideSource);
+            //改变本地存储
+            DeviceStorage.save('count',1);
+        }
+
+    }
+
+
     //指父元素对组件的props或state进行了修改
     componentWillReceiveProps(){}
     //一般用于优化，可以返回false或true来控制是否进行渲染
-    shouldComponentUpdate(){}
+    shouldComponentUpdate(){
+        return true;
+    }
     //组件刷新前调用，类似componentWillMount
     componentWillUpdate(){}
     //更新后的hook
@@ -173,6 +217,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#CDCDCD',
         alignSelf:'center',
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
     },
 });
 
