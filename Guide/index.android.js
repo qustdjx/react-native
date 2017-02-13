@@ -28,9 +28,10 @@ import {
 let _navigator;
 let MainPage = require('./MainPage');
 import NButton from './app/commonview/NButton';
-import HelloWorldApp from './HelloWorldApp'
 import NetUitl from './app/net/NetUitl';
 import DeviceStorage from './app/util/DeviceStorage';
+
+import JdWebView from './WebView';
 
 class Guide extends Component {
 
@@ -57,9 +58,22 @@ class Guide extends Component {
      *组件将要被加载在视图
      */
     componentWillMount(){
-        DeviceStorage.save('count',0);
-      let  count=DeviceStorage.get('count');
-      console.log(count);
+      this.getAppCount();
+    }
+
+    async getAppCount(){
+        try{
+            let value=await DeviceStorage.get('APP_COUNT');
+            if(value!=null){
+                this.setState({count:value});
+            }else{
+                this.setState({count:0});
+                let url='http://framework.heapsegment.com/ReactNativeApi/getGuideImage';
+                NetUitl.get(url,this._getGuideSource);
+            }
+        }catch(error){
+            this.setState({count:0});
+        }
     }
 
     _getGuideSource(set) {
@@ -124,6 +138,12 @@ class Guide extends Component {
                 <MainPage/>
             );
         }
+
+        if(route.id === 'webview')
+        {
+            return (<JdWebView url={route.url}/>);
+        }
+
     }
     /**
      *render是一个组件必须有的方法，形式为一个函数，
@@ -134,16 +154,17 @@ class Guide extends Component {
     render(){
         var renderScene = this.renderSceneAndroid;
         var configureScence = this.configureScenceAndroid;
-
-
-        if (!this.state.guideImg) {
-            //如果guideImg==null的情况 初始情况  渲染加载视图
-            return this.renderLoadingView();
+             // 网络获取启动页
+             //  let count=
+        if(this.state.guideImg)
+        {
+            //改变本地存储
+            DeviceStorage.save('APP_COUNT',1);
         }
         return (
             <Navigator
                 debugOverlay={false}
-                initialRoute={{ title: 'Main', id:'main'}}
+                initialRoute={this.state.guideImg?{ title: 'Main', id:'main'}:{title: 'MainPage', id:'page'}}
                 configureScence={{configureScence}}
                 renderScene={renderScene}
             />
@@ -151,15 +172,6 @@ class Guide extends Component {
     }
     //用了render方法后，组件加载成功并被成功渲染出来以后所执行的hook函数，一般会将网络请求等加载数据的操作，放在这个函数里进行，来保证不会出现UI上的错误
     componentDidMount(){
-
-        if(this.state.count)
-        {
-            let url='http://framework.heapsegment.com/ReactNativeApi/getGuideImage';
-            NetUitl.get(url,this._getGuideSource);
-            //改变本地存储
-            DeviceStorage.save('count',1);
-        }
-
     }
 
 

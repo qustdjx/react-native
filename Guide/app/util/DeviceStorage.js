@@ -13,7 +13,7 @@ class DeviceStorage {
      */
 
     static get(key) {
-        return AsyncStorage.getItem(key).then((value) => {
+        return  AsyncStorage.getItem(key).then((value) => {
             return JSON.parse(value);
         });
     }

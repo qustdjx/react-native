@@ -18,13 +18,14 @@ import {
 } from 'react-native';
 
 
+import ShopIndex from './ShopIndex';
+
 import MyHealth from './MyHealth';
 import HealthTools from './HealthTools';
 import HealthSQ  from './HealthSQ';
 import MyAccount  from './MyAccount';
 import TabNavigator from 'react-native-tab-navigator';
 import TopScreen  from './TopScreen';
-import NetUitl from './app/net/NetUitl';
 
  const MY_HEALTH = '我的健康';
  const MY_HEALTH_NORMAL = require('./image/my_health_un.png');
@@ -62,7 +63,7 @@ import NetUitl from './app/net/NetUitl';
 
      constructor(props) {
          super(props);
-         this.state = {selectedTab: SHOP_INDEX,
+         this.state = {selectedTab: MY_HEALTH,
              tabBarShow:true};
          this._renderTabItem =  this._renderTabItem.bind(this);
      }
@@ -85,12 +86,11 @@ import NetUitl from './app/net/NetUitl';
          );
      }
 
-
      _createChildView1(tag) {
          let renderView;
          switch (tag) {
              case MY_HEALTH:
-                 renderView = <MyHealth />;
+                 renderView = <ShopIndex nav={this.props.nav} />;
                  break;
              case MY_HEALTH_CONSULT:
                  renderView = <TopScreen />;
@@ -120,21 +120,13 @@ import NetUitl from './app/net/NetUitl';
 
      render(){
          let {tabBarShow} = this.state;
-         console.log(tabBarShow);
-         // let sx = 'dddd';
-         // let url='http://127.0.0.1:9012/ReactNativeApi/getGuideImage';
-         // function _getData(set)
-         // {
-         //     console.log(set);
-         //     return set;
-         // }
-         // NetUitl.postFrom(url,sx,_getData);
+
          return (
              <View style={{flex: 1}}>
                  <TabNavigator hidesTabTouch={true}
                                sceneStyle={{paddingBottom: 0}}
                                tabBarStyle={tabBarShow ? styles.tabNav : styles.tabNavHide}
-                               overflow={'hidden'} >
+                               >
                      {this._renderTabItem(MY_HEALTH_NORMAL, MY_HEALTH_FOCUS, MY_HEALTH,this._createChildView1(MY_HEALTH))}
                      {this._renderTabItem(MY_HEALTH_CONSULT_NORMAL, MY_HEALTH_CONSULT_FOCUS, MY_HEALTH_CONSULT, this._createChildView1(MY_HEALTH_CONSULT))}
                      {this._renderTabItem(MY_HEALTH_TOOLS_NORMAL, MY_HEALTH_TOOLS_FOCUS, MY_HEALTH_TOOLS, this._createChildView1(MY_HEALTH_TOOLS))}
