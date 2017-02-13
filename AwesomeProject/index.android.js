@@ -13,7 +13,7 @@ import LocalImage from './demo/LocalImage';
 import PropsTest from './demo/PropsTest';
 import StateTest from './demo/StateTest'
 import ListViewTest from './demo/ListViewTest'
-
+import UniformView from './demo/navigator_uniform'
 
 class Greeting extends Component {
     render() {
