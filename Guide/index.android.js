@@ -4,12 +4,6 @@
  * @flow
  */
 
-/**
- * HelloWorld1 Native App
- * https://github.com/facebook/react-native
- * @author:lidong
- * @date：2016-02-28
- */
 'use strict';
 import React,{ Component} from 'react';
 import {
@@ -135,7 +129,9 @@ class Guide extends Component {
 
         if(route.id === 'page'){
             return (
+
                 <MainPage nav={_navigator} />
+
             );
         }
 
