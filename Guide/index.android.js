@@ -135,7 +135,7 @@ class Guide extends Component {
 
         if(route.id === 'page'){
             return (
-                <MainPage/>
+                <MainPage nav={_navigator} />
             );
         }
 
